@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../store/store";
 
 const Signup = () => {
   const [user, setUser] = useState({
@@ -9,6 +10,7 @@ const Signup = () => {
     phone: "",
   });
   const Navigate = useNavigate();
+  const {storeTokenLS}=useAuth();
 
   const handlInput = (e) => {
     console.log(e);
@@ -29,8 +31,8 @@ const Signup = () => {
       if (response.ok) {
         alert("data submited Successfuly");
         const res_data = await response.json();
+        storeTokenLS(res_data.token);
         setUser({ username: "", email: "", password: "", phone: "" });
-        console.log(res_data);
         Navigate("/login");
       }else{
         alert("email alredy exist")

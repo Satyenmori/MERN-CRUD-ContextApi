@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../store/store";
 
 const Signin = () => {
   const [user, setUser] = useState({
@@ -8,6 +9,7 @@ const Signin = () => {
   });
 
   const Navigate = useNavigate();
+  const { storeTokenLS } = useAuth();
 
   const handlInput = (e) => {
     let name = e.target.name;
@@ -27,12 +29,11 @@ const Signin = () => {
       if (response.ok) {
         alert("Login Successfuly");
         const res_data = await response.json();
-        console.log(res_data);
+        storeTokenLS(res_data.token);
         Navigate("/");
-      }else{
-        alert("wrong incridible")
+      } else {
+        alert("wrong incridible");
       }
-      
     } catch (error) {
       console.log(error);
     }
