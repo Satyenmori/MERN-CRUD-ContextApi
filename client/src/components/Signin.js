@@ -1,10 +1,42 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Signin = () => {
-  const handlInput = (e) => {};
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handSubmit = async (e) => {};
+  const Navigate = useNavigate();
+
+  const handlInput = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setUser({ ...user, [name]: value });
+  };
+
+  const handSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:5050/auth/signin", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
+      if (response.ok) {
+        alert("Login Successfuly");
+        const res_data = await response.json();
+        console.log(res_data);
+        Navigate("/");
+      }else{
+        alert("wrong incridible")
+      }
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <section>
@@ -35,7 +67,7 @@ const Signin = () => {
                       aria-label="email"
                       aria-describedby="addon-wrapping"
                       autoComplete="off"
-                      //value={email}
+                      value={user.email}
                       onChange={handlInput}
                       required
                     />
@@ -53,7 +85,7 @@ const Signin = () => {
                       aria-label="password"
                       aria-describedby="addon-wrapping"
                       autoComplete="off"
-                      //value={password}
+                      value={user.password}
                       onChange={handlInput}
                       required
                     />

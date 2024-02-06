@@ -1,18 +1,43 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  
-  
-  
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+    phone: "",
+  });
+  const Navigate = useNavigate();
 
   const handlInput = (e) => {
-  
+    console.log(e);
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setUser({ ...user, [name]: value });
   };
 
   const handSubmit = async (e) => {
-    
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:5050/auth/signup", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
+      if (response.ok) {
+        alert("data submited Successfuly");
+        const res_data = await response.json();
+        setUser({ username: "", email: "", password: "", phone: "" });
+        console.log(res_data);
+        Navigate("/login");
+      }else{
+        alert("email alredy exist")
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -45,8 +70,7 @@ const Signup = () => {
                       id="username"
                       aria-label="Username"
                       aria-describedby="addon-wrapping"
-                      
-                      //value={user.username}
+                      value={user.username}
                       onChange={handlInput}
                       required
                     />
@@ -63,8 +87,7 @@ const Signup = () => {
                       id="email"
                       aria-label="email"
                       aria-describedby="addon-wrapping"
-                      
-                      //value={user.email}
+                      value={user.email}
                       onChange={handlInput}
                       required
                     />
@@ -81,8 +104,7 @@ const Signup = () => {
                       id="password"
                       aria-label="password"
                       aria-describedby="addon-wrapping"
-                      
-                      //value={user.password}
+                      value={user.password}
                       onChange={handlInput}
                       required
                     />
@@ -99,8 +121,7 @@ const Signup = () => {
                       id="phone"
                       aria-label="phone"
                       aria-describedby="addon-wrapping"
-                      
-                      //value={user.phone}
+                      value={user.phone}
                       onChange={handlInput}
                       required
                     />
