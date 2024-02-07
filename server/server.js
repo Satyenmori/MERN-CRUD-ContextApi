@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { connDB } from "./utility/db.js";
 import { authRourte } from "./router/Auth.js";
+import { contectRouter } from "./router/Contect.js";
+import { userRouter } from "./router/User.js";
 
 const app = express();
 dotenv.config();
@@ -18,6 +20,8 @@ app.use(express.json());
 
 //router
 app.use("/auth", authRourte);
+app.use("/contect", contectRouter);
+app.use("/user", userRouter);
 
 connDB().then(() => {
   app.listen(process.env.PORT, () => {
