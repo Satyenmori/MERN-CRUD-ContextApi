@@ -13,6 +13,15 @@ export const AuthProvider = ({ children }) => {
     return localStorage.setItem("token", serverToken);
   };
 
+  // logout funcationality
+
+  const logoutUser = () => {
+    setToken("");
+    return localStorage.removeItem("token");
+  };
+
+  let isloggedin = !!token;
+
   // all userdata save................
 
   const userAuthentication = async () => {
@@ -39,7 +48,9 @@ export const AuthProvider = ({ children }) => {
   },[]);
 
   return (
-    <AuthContext.Provider value={{ storeTokenLS,user,AuthorizationToken }}>
+    <AuthContext.Provider
+      value={{ storeTokenLS, user, AuthorizationToken, logoutUser, isloggedin }}
+    >
       {children}
     </AuthContext.Provider>
   );
