@@ -5,6 +5,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState("");
+  const [isLoading, setIsLoading] = useState(true); // used to page no need refress data get in contect page
   const AuthorizationToken = `Bearer ${token}`;
 
   //jwt token save.............
@@ -18,6 +19,7 @@ export const AuthProvider = ({ children }) => {
   const logoutUser = () => {
     setToken("");
     return localStorage.removeItem("token");
+    setUser("");
   };
 
   let isloggedin = !!token;
@@ -40,18 +42,24 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  useEffect(()=>{
-    userAuthentication();
-  },[]);
+  useEffect(() => {
+    if (isloggedin) {
+      userAuthentication();
+    } else {
+      setIsLoading(false); // If not logged in, no need to fetch user data
+    }
+  }, [isloggedin]);
 
   return (
     <AuthContext.Provider
       value={{ storeTokenLS, user, AuthorizationToken, logoutUser, isloggedin }}
     >
-      {children}
+      {!isLoading && children}
     </AuthContext.Provider>
   );
 };
