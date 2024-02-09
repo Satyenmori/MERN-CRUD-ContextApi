@@ -7,6 +7,10 @@ import Contect from "./components/Contect";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Logout from "./components/Logout";
+import { AdminLayout } from "./components/Layout/Admin-Layout";
+import { AdminUser } from "./components/Admin-user";
+import { AdminContect } from "./components/Admin-Contact";
+import { PageNotFound } from "./components/404";
 
 function App() {
   return (
@@ -19,6 +23,11 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Signin />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/admin" element={<AdminLayout/>}>
+            <Route path="user" element={<AdminUser/>}/>
+            <Route path="contect" element={<AdminContect/>}/>
+          </Route>
+          <Route path="*" element={<PageNotFound/>}/>
         </Routes>
       </BrowserRouter>
     </>

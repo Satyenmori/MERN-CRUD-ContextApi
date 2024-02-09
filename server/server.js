@@ -5,6 +5,7 @@ import { connDB } from "./utility/db.js";
 import { authRourte } from "./router/Auth.js";
 import { contectRouter } from "./router/Contect.js";
 import { userRouter } from "./router/User.js";
+import { adminRouter } from "./router/Admin.js";
 
 const app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use("/auth", authRourte);
 app.use("/contect", contectRouter);
 app.use("/user", userRouter);
+app.use("/admin", adminRouter);
 
 connDB().then(() => {
   app.listen(process.env.PORT, () => {
