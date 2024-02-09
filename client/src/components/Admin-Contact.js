@@ -18,6 +18,25 @@ export const AdminContect = () => {
       console.log(error);
     }
   };
+
+  const deleteContectByid = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5050/admin/contect/delete/${id}`,
+        {
+          method: "DELETE",
+          headers: { Authorization: AuthorizationToken },
+        }
+      );
+      const data = response.json();
+      if (response.ok) {
+        getAllContectData();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getAllContectData();
   }, []);
@@ -45,7 +64,10 @@ export const AdminContect = () => {
                   <td>
                     <i className="fa-regular fa-pen-to-square"></i>
 
-                    <button className="delete">
+                    <button
+                      className="delete"
+                      onClick={() => deleteContectByid(user._id)}
+                    >
                       <i className="fa-solid fa-trash fa"></i>
                     </button>
                   </td>
