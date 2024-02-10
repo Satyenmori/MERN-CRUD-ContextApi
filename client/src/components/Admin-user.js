@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../store/store";
+import{Link} from "react-router-dom"
 
 export const AdminUser = () => {
   const [users, setUsers] = useState([]);
@@ -63,8 +64,10 @@ export const AdminUser = () => {
                   <td>{user.username}</td>
                   <td>{user.email}</td>
                   <td>{user.phone}</td>
-                  <td>
-                    <i className="fa-regular fa-pen-to-square"></i>
+                  <td className="edit">
+                    <Link to={`/admin/users/update/${user._id}/edit`}>
+                      <i className="fa-regular fa-pen-to-square"></i>
+                    </Link>
 
                     <button
                       className="delete"

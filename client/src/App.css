@@ -3,6 +3,8 @@
 .edit {
   color: green;
   border: none;
+  margin-right: 5px;
+  cursor: pointer;
 }
 .delete {
   color: red;

@@ -44,3 +44,26 @@ export const deleteContect = async (req, res) => {
     res.status(500).json("Admin-contect-Not delete", error);
   }
 };
+
+// Update Api User
+
+export const getUserbyId = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const userdData = await User.findOne({ _id: id }, { password: 0 });
+    return res.status(200).json(userdData);
+  } catch (error) {
+    res.status(500).json("user Update not ", error);
+  }
+};
+
+export const updateUserbyId = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updateUser = req.body;
+    const updateData = await User.updateOne({ _id: id }, { $set: updateUser });
+    return res.status(200).json(updateData);
+  } catch (error) {
+    res.status(500).json("User Not updated", error);
+  }
+};
