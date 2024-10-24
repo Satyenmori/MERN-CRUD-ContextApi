@@ -19,13 +19,11 @@ export const checkUser = async (req, res) => {
     const { email, password } = req.body;
     const isUser = await User.findOne({ email, password });
     if (isUser) {
-      res
-        .status(200)
-        .json({
-          msg: "Login Success",
-          token: await isUser.generateToken(),
-          userId: isUser._id.toString(),
-        });
+      res.status(200).json({
+        msg: "Login Success",
+        token: await isUser.generateToken(),
+        userId: isUser._id.toString(),
+      });
     } else {
       res.status(401).json({ msg: "not Found" });
     }

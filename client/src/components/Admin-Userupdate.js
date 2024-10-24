@@ -54,6 +54,7 @@ export const AdminUpdate = () => {
           body: JSON.stringify(data),
         }
       );
+
       alert("User Update Successfuly");
       Navigate("/admin/user");
     } catch (error) {
