@@ -12,6 +12,9 @@ import { AdminUser } from "./components/Admin-user";
 import { AdminContect } from "./components/Admin-Contact";
 import { PageNotFound } from "./components/404";
 import AdminUpdate from "./components/Admin-Userupdate";
+import FormAdd from "./components/Form-Add";
+import FormData from "./components/FormData";
+import EditForm from "./components/FormEdit";
 
 function App() {
   return (
@@ -32,6 +35,10 @@ function App() {
               element={<AdminUpdate />}
             />
           </Route>
+          <Route path="/formdata" element={<FormData />} />
+          <Route path="/addform" element={<FormAdd />} />          
+          <Route path="/edit/:id" element={<EditForm />} />          
+
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

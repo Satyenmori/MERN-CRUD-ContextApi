@@ -6,25 +6,21 @@ import { authRourte } from "./router/Auth.js";
 import { contectRouter } from "./router/Contect.js";
 import { userRouter } from "./router/User.js";
 import { adminRouter } from "./router/Admin.js";
+import { formRouter } from "./router/Form-CRUD.js";
 
 const app = express();
 dotenv.config();
 
 //middaleware
-const corsoption = {
-  origin: "http://localhost:3000",
-  method: "GET,POST,DELETE,HEAD,PATCH,PUT",
-  credentials: true,
-};
-app.use(cors(corsoption));
+app.use(cors({ origin: true }));
 app.use(express.json());
-
+app.use(express.static("uploads"));
 //router
 app.use("/auth", authRourte);
 app.use("/contect", contectRouter);
 app.use("/user", userRouter);
 app.use("/admin", adminRouter);
-
+app.use("/formdata", formRouter);
 connDB().then(() => {
   app.listen(process.env.PORT, () => {
     console.log("Port Started");
