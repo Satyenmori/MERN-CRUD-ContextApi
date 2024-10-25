@@ -184,7 +184,23 @@ const FormEdit = () => {
                   <label>Single Image</label>
                 </div>
               </div>
-
+              <div className="col-md-12 d-flex flex-wrap">
+                {singleImage && (
+                  <div className="position-relative">
+                    <img
+                      src={`http://localhost:5050/${singleImage}`}
+                      alt={`Single Img`}
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        margin: "5px",
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+              {/* New Select Single IMG */}
+              
               <div className="col-12">
                 <button className="btn btn-primary w-100 py-3" type="submit">
                   Update Form Data

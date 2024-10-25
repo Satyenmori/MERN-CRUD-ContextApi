@@ -2,29 +2,17 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import {
+  handleImageDeletion,
+  handleImageSelection,
+  handleSingleImageSelection,
+} from "./utility/MultipleImages";
 
 const FormAdd = () => {
   const { register, handleSubmit, reset } = useForm();
   const [selectedImages, setSelectedImages] = useState([]);
   const [singleImage, setSingleImage] = useState(null);
   const Navigate = useNavigate();
-
-  // Handle multiple image selection
-  const handleImage = (e) => {
-    const files = Array.from(e.target.files);
-    setSelectedImages((prevImages) => [...prevImages, ...files]);
-  };
-
-  // Handle single image selection
-  const handleSingleImg = (e) => {
-    const file = e.target.files[0];
-    setSingleImage(file);
-  };
-
-  // Handle image deletion
-  const handleDeleteImage = (index) => {
-    setSelectedImages((prevImages) => prevImages.filter((_, i) => i !== index));
-  };
 
   const onSubmit = async (data) => {
     try {
@@ -84,7 +72,9 @@ const FormAdd = () => {
                     type="file"
                     className="form-control"
                     multiple
-                    onChange={handleImage}
+                    onChange={(e) =>
+                      handleImageSelection(e, selectedImages, setSelectedImages)
+                    }
                   />
                   <label>Images</label>
                 </div>
@@ -106,7 +96,13 @@ const FormAdd = () => {
                     <button
                       type="button"
                       className="btn btn-danger btn-sm position-absolute end-0"
-                      onClick={() => handleDeleteImage(index)}
+                      onClick={() =>
+                        handleImageDeletion(
+                          index,
+                          selectedImages,
+                          setSelectedImages
+                        )
+                      }
                     >
                       <i className="fa-solid fa-trash fa"></i>
                     </button>
@@ -119,12 +115,36 @@ const FormAdd = () => {
                   <input
                     type="file"
                     className="form-control"
-                    onChange={handleSingleImg}
+                    onChange={(e) =>
+                      handleSingleImageSelection(e, setSingleImage)
+                    }
                   />
                   <label>Single Image</label>
                 </div>
               </div>
-
+              {/* Display selected Single images */}
+              <div className="col-md-12 d-flex flex-wrap">
+                {singleImage && (
+                  <div className="position-relative">
+                    <img
+                      src={URL.createObjectURL(singleImage)}
+                      alt="Single Image"
+                      style={{
+                        width: "220px",
+                        height: "110px",
+                        margin: "5px",
+                      }}
+                    />
+                    <button
+                      type="button"
+                      className="btn btn-danger btn-sm position-absolute end-0"
+                      onClick={() => setSingleImage(null)}
+                    >
+                      <i className="fa-solid fa-trash fa"></i>
+                    </button>
+                  </div>
+                )}
+              </div>
               <div className="col-12">
                 <button className="btn btn-primary w-100 py-3" type="submit">
                   Add Testing Data
