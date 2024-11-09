@@ -17,6 +17,8 @@ import FormData from "./components/FormData";
 import EditForm from "./components/FormEdit";
 import Demo from "./components/Demo";
 import Linkadd from "./components/Linkadd";
+import Cards from "./components/Card";
+import AddCard from "./components/AddCard";
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
           <Route path="/addform" element={<FormAdd />} />
           <Route path="/edit/:id" element={<EditForm />} />
           <Route path="/addlink" element={<Linkadd />} />
+          <Route path="/card" element={<Cards />} />
+          <Route path="/addcard" element={<AddCard />} />
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>

@@ -7,6 +7,8 @@ const userSchema = new mongoose.Schema({
   password: { type: String, require: true },
   phone: { type: Number, require: true },
   role: { type: String, default: "user" },
+  plan: { type: String, enum: ["Basic", "Premium"], default: "Basic" },
+  cards: [{ type: mongoose.Schema.Types.ObjectId, ref: "Card" }],
 });
 
 userSchema.methods.generateToken = async function () {
@@ -23,7 +25,7 @@ userSchema.methods.generateToken = async function () {
       }
     );
   } catch (error) {
-    console.error("Token Error",error);
+    console.error("Token Error", error);
   }
 };
 

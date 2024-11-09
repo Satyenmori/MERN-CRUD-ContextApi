@@ -1,0 +1,42 @@
+.c-cardmain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.c-card {
+  width: 400px;
+  height: 200px;
+  background-color: whitesmoke;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.c-main {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 50px;
+}
+.c-btnflex {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  /* height: 100vh;  */
+}
+
+.c-btndiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; 
+  background-color: whitesmoke;
+  width: 400px;
+  height: 200px;
+}
+
+.c-btndiv a {
+  text-decoration: none; 
+  color: #007bff; 
+  font-size: 20px; 
+  font-weight: bold;
+  margin-left: 10px; 
+}
