@@ -7,6 +7,7 @@ import { contectRouter } from "./router/Contect.js";
 import { userRouter } from "./router/User.js";
 import { adminRouter } from "./router/Admin.js";
 import { formRouter } from "./router/Form-CRUD.js";
+import { linkRouter } from "./router/Links.js";
 
 const app = express();
 dotenv.config();
@@ -21,6 +22,7 @@ app.use("/contect", contectRouter);
 app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 app.use("/formdata", formRouter);
+app.use("/api", linkRouter);
 connDB().then(() => {
   app.listen(process.env.PORT, () => {
     console.log("Port Started");

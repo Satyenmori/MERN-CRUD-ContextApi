@@ -15,6 +15,8 @@ import AdminUpdate from "./components/Admin-Userupdate";
 import FormAdd from "./components/Form-Add";
 import FormData from "./components/FormData";
 import EditForm from "./components/FormEdit";
+import Demo from "./components/Demo";
+import Linkadd from "./components/Linkadd";
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/demo" element={<Demo />} />
           <Route path="/contect" element={<Contect />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Signin />} />
@@ -36,8 +39,9 @@ function App() {
             />
           </Route>
           <Route path="/formdata" element={<FormData />} />
-          <Route path="/addform" element={<FormAdd />} />          
-          <Route path="/edit/:id" element={<EditForm />} />          
+          <Route path="/addform" element={<FormAdd />} />
+          <Route path="/edit/:id" element={<EditForm />} />
+          <Route path="/addlink" element={<Linkadd />} />
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>
